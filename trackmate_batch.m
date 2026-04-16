@@ -23,7 +23,7 @@
 %% ============================================================
 clc;
 % Root directory where one sub-folder per case will be created
-outputRoot = 'E:\March Re 90,000 inception data\Processed images\testing\testing 2';
+outputRoot = 'E:\March Re 90,000 inception data\Processed images\Batch data\Results';
 
 % Define each case: name + the folders that belong to it.
 % Add or remove cases(N) blocks as needed.
@@ -31,13 +31,22 @@ outputRoot = 'E:\March Re 90,000 inception data\Processed images\testing\testing
 % Files are named:  <name>_1.xml, <name>_2.xml, ...
 
 cases(1).name    = 'P10S20';
-cases(1).folders = {"E:\March Re 90,000 inception data\Processed images\testing\testing 1\P10S20"};
+cases(1).folders = {"E:\March Re 90,000 inception data\Processed images\Batch data\P10S20"};
 
 cases(2).name    = 'P10S30';
-cases(2).folders = {"E:\March Re 90,000 inception data\Processed images\testing\testing 1\P10S30"};
+cases(2).folders = {"E:\March Re 90,000 inception data\Processed images\Batch data\P10S30"};
 
 cases(3).name    = 'P10S50';
-cases(3).folders = {"E:\March Re 90,000 inception data\Processed images\testing\testing 1\P10S50"};
+cases(3).folders = {"E:\March Re 90,000 inception data\Processed images\Batch data\P10S50"};
+
+cases(4).name    = 'P10S70';
+cases(4).folders = {"E:\March Re 90,000 inception data\Processed images\Batch data\P10S70"};
+
+cases(5).name    = 'P10S100';
+cases(5).folders = {"E:\March Re 90,000 inception data\Processed images\Batch data\P10S100"};
+
+cases(6).name    = 'Smooth';
+cases(6).folders = {"E:\March Re 90,000 inception data\Processed images\Batch data\Smooth"};
 
 % cases(3).name    = 'P20S40';
 % cases(3).folders = {
@@ -149,12 +158,12 @@ for c = 1:numel(cases)
             %--- Tracker: Advanced Kalman Filter ----------------------
             settings.trackerFactory  = AdvancedKalmanTrackerFactory();
             settings.trackerSettings = settings.trackerFactory.getDefaultSettings();
-            settings.trackerSettings.put('LINKING_MAX_DISTANCE',  15.0);
-            settings.trackerSettings.put('KALMAN_SEARCH_RADIUS',   22.0);
+            settings.trackerSettings.put('LINKING_MAX_DISTANCE',  22);
+            settings.trackerSettings.put('KALMAN_SEARCH_RADIUS',   15);
             settings.trackerSettings.put('MAX_FRAME_GAP',          int32(1));
             settings.trackerSettings.put('ALLOW_GAP_CLOSING',      false);
             settings.trackerSettings.put('ALLOW_TRACK_SPLITTING',  true);
-            settings.trackerSettings.put('SPLITTING_MAX_DISTANCE', 20.0);
+            settings.trackerSettings.put('SPLITTING_MAX_DISTANCE', 30);
             settings.trackerSettings.put('ALLOW_TRACK_MERGING',    false);
 
             %--- Feature analyzers (required for track filters) -------
@@ -218,7 +227,7 @@ fprintf('\n=== All cases complete ===\n');
 %%  re-running the full batch.
 %% ============================================================
 
-showDisplay = true;   % <-- set to true to open the displayer
+showDisplay = false;   % <-- set to true to open the displayer
 
 % Path to the TrackMate XML you want to inspect
 displayXml = "E:\March Re 90,000 inception data\Processed images\testing\testing 2\P10S20\P10S20_1.xml";
