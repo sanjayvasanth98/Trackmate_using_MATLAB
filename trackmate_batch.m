@@ -11,7 +11,7 @@
 %            - Allow track splitting : true
 %            - Allow track merging   : false
 % Filters  : No spot filters | Track displacement > 1 px
-% Output   : TrackMate XML per file  ->  <outputRoot>/<caseName>/<caseName>_1.xml, _2.xml ...
+% Output   : TrackMate XML per file  ->  <outputRoot>/<caseName>/<videoFileName>.xml
 %
 % NOTE on tracker class name: If AdvancedKalmanTrackerFactory fails to load,
 % open one of your videos in the TrackMate GUI with your settings, save the
@@ -28,7 +28,7 @@ outputRoot = 'E:\March Re 90,000 inception data\Processed images\Batch data\Resu
 % Define each case: name + the folders that belong to it.
 % Add or remove cases(N) blocks as needed.
 % Each case gets its own output folder:  <outputRoot>\<name>\
-% Files are named:  <name>_1.xml, <name>_2.xml, ...
+% Files are named after the source AVI file, with the extension changed to .xml.
 
 cases(1).name    = 'P10S20';
 cases(1).folders = {"E:\March Re 90,000 inception data\Processed images\Batch data\P10S20"};
@@ -190,7 +190,8 @@ for c = 1:numel(cases)
             end
 
             % Export TrackMate XML -------------------------------------
-            xmlName = sprintf('%s_%d.xml', caseName, i);
+            [~, aviBaseName, ~] = fileparts(aviPath);
+            xmlName = [aviBaseName '.xml'];
             xmlPath = fullfile(outputFolder, xmlName);
 
             writer = TmXmlWriter(java.io.File(xmlPath));

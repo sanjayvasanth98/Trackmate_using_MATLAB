@@ -6,6 +6,9 @@
 *.mp4
 *.tif
 *.tiff
+*.png
+*.jpg
+*.jpeg
 
 # ── MATLAB binary / workspace files ──────────────────────────
 *.mat
